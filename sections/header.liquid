@@ -1,66 +1,65 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+<header class="relative w-full md:flex flex-row justify-between">
+  
+  {% comment %} {% assign list_json = '[
+    { "name": "Barbie Mermaid" },
+    { "name": "Barbie Totally Hair",
+      "sub_items": [
+        { "name": "Blonde Hair" },
+        { "name": "Brunette Hair" }
+        ]
+      },
+      { "name": "Barbie Enchanted" }
+      ]'
+      %} {% endcomment %}
+      
+      {% assign items = 'Main, Contacts, About, Catalog, Delivery, Account, Cart' | split: ',' %}
+      {% assign sub_items = 'Barbie, Kelly, Midge, Skipper, Teresa, Ken' | split: ',' %}
+      {% assign sub_sub_items = 'Barbie 2000-s, Barbie 90-s, Barbie 80-s, Barbie 70-s' | split: ',' %}
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-    {% endif %}
-
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
-      {% endif %}
-
-      {{ 'icon-cart.svg' | inline_asset_content }}
+  <div class="floating-particles pointer-events-none"></div>
+  <div class="flex justify-between items-center p-2">
+    <a href="{{ routes.root_url }}" aria-label="Barbie Home">
+      <img class="nav__logo" src="{{ 'logo.svg' | asset_url }}" alt="Barbie Logo" width="80" height="20">
     </a>
+    <button id="burger" class="burger md:hidden">
+      <img src="{{ 'burger.svg' | asset_url }}" class="burger__icon" width="50" height="50">
+      <img src="{{ 'cross.svg' | asset_url }}" class="burger__cross hidden" width="40" height="40">
+    </button>
   </div>
+      
+  <nav class="nav">
+    <ul class="nav__list hidden flex-col md:flex flex-row justify-between gap-20 items-center md:items-start w-full p-8">
+      {% comment %} <li class="item">
+        <a class="nav__link flex justify-center" href="{{ routes.root_url }}" aria-label="Barbie Home">
+          <img class="nav__logo" src="{{ 'logo.svg' | asset_url }}" alt="Barbie Logo" width="80" height="20">
+        </a>
+      </li> {% endcomment %}
+      {% for item in items %}
+        {% assign barbie_item = item | strip %}
+        
+        <li class="item relative {% if barbie_item == 'Catalog' %}has-dropdown{% endif %}">
+          <a href="#" class=" text-[#ff5599] nav__link">{{ barbie_item }}</a>
+        </li>
+        {% if barbie_item == 'Catalog' %}
+          <ul class="item__sub absolute visibility-hidden flex flex-col items-center">
+            {% for sub_item in sub_items %}
+              {% assign new_item = sub_item | strip %}
+              <li class="flex flex-col items-center">
+                <a href="#" class="text-[#ff5599] nav__link">{{ sub_item | strip }}</a>
+                {% if new_item == 'Barbie' %}
+                  <ul>
+                    {% for sub_sub_item in sub_sub_items %}
+                      <li>
+                        <a href="#" class="text-[#ff5599] nav__link">{{ sub_sub_item | strip }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul> 
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
 </header>
-
-{% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
-
-{% schema %}
-{
-  "name": "t:general.header",
-  "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    }
-  ]
-}
-{% endschema %}

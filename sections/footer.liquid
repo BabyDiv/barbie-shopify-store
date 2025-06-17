@@ -1,42 +1,23 @@
 <footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
-
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
+  <nav>
+    <ul class="nav__list hidden flex-col md:flex flex-row justify-between gap-5 items-center md:items-start w-full p-8 lg:gap-20">
+      {% for item in linklists["footer"].links %}
+        <li class="item__footer {% if item.links != blank %}has-dropdown{% endif %}">
+          <a href ="{{ item.url }}" class="text-[#ff5599] nav__link">{{ item.title }}</a>
+          {% if item.links != blank %}
+            <ul class="item__ul visibility-hidden">
+              {% for subitem in item.links %}
+              <li>
+                <a href="{{ subitem.url }}" class="text-[#ff5599] nav__link">{{ subitem.title }}</a>
+              </li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
       {% endfor %}
-    {% endif %}
-  </div>
+    </ul>
+  </nav>
 </footer>
-
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
-
 {% schema %}
 {
   "name": "t:general.footer",

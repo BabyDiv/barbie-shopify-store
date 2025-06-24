@@ -1,0 +1,33 @@
+<div class="barbie-section">
+  <h1>{{ section.settings.title }}</h1>
+  <p>{{ section.settings.content }}</p>
+  <p><strong>Имя:</strong> {{ section.settings.name }}</p>
+  <p>Секция загружена ✅</p>
+  <pre>{{ section.settings | json }}</pre>
+</div>
+
+{% schema %}
+{
+  "name": "barbie",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Заголовок",
+      "default": "Добро пожаловать!"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Описание",
+      "default": "Описание страницы"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Имя",
+      "default": "Барби"
+    }
+  ]
+}
+{% endschema %}

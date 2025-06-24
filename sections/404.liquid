@@ -1,11 +1,4 @@
-{% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
-{% endcomment %}
-
-<h1>{{ '404.title' | t }}</h1>
+{% comment %} <h1>{{ '404.title' | t }}</h1>
 
 <p>
   {{ '404.not_found' | t }}
@@ -19,5 +12,48 @@
 {
   "name": "t:general.404",
   "settings": []
+}
+{% endschema %} {% endcomment %}
+
+<h1>
+  {{ section.settings.title }}
+</h1>
+<p class="text-2xl mt-14">
+  {{ section.settings.subtext_title }}
+</p>
+<div class="flex bg-fuchsia-800 border border-b-fuchsia-300 pt-4 pb-4 pl-10 pr-10 mt-10 rounded-full">
+  <a href="{{ section.settings.button_url | default: '/' }}" class="text-lg text-amber-50">{{ section.settings.button_label }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "t:general.404",
+  "tag": "section",
+  "class": "flex flex-col items-center justify-center text-center text-5xl mt-40",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "404",
+      "label": "404 Heading Title"
+    },
+    {
+      "type": "text",
+      "id": "subtext_title",
+      "default": "The page that you're looking for is not found",
+      "label": "404 Subtext Title"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Back to homepage",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ]
 }
 {% endschema %}

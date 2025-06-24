@@ -141,3 +141,16 @@ header {
   z-index: 10;
 }
 
+.article__image {
+    transition: transform 0.3s ease;
+}
+
+.article__image:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.article__title {
+  font-family: "Dancing Script";
+}
+

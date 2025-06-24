@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "barbie": {
+      "type": "barbie",
+      "settings": {
+        "title": "Добро пожаловать!",
+        "content": "Описание страницы",
+        "name": "Барби"
+      }
+    }
+  },
+  "order": [
+    "barbie"
+  ]
+}

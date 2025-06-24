@@ -7,15 +7,22 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-amber-50: oklch(98.7% 0.022 95.277);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
     --color-purple-500: oklch(62.7% 0.265 303.9);
+    --color-fuchsia-300: oklch(83.3% 0.145 321.434);
+    --color-fuchsia-800: oklch(45.2% 0.211 324.591);
     --color-pink-500: oklch(65.6% 0.241 354.308);
     --color-white: #fff;
     --spacing: 0.25rem;
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
     --text-4xl: 2.25rem;
     --text-4xl--line-height: calc(2.5 / 2.25);
+    --text-5xl: 3rem;
+    --text-5xl--line-height: 1;
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
     --font-weight-bold: 700;
@@ -191,11 +198,17 @@
   .static {
     position: static;
   }
+  .m-20 {
+    margin: calc(var(--spacing) * 20);
+  }
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
   }
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
+  }
+  .mt-14 {
+    margin-top: calc(var(--spacing) * 14);
   }
   .mt-40 {
     margin-top: calc(var(--spacing) * 40);
@@ -260,6 +273,9 @@
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
   .gap-5 {
     gap: calc(var(--spacing) * 5);
   }
@@ -268,6 +284,19 @@
   }
   .overflow-hidden {
     overflow: hidden;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-b-fuchsia-300 {
+    border-bottom-color: var(--color-fuchsia-300);
+  }
+  .bg-fuchsia-800 {
+    background-color: var(--color-fuchsia-800);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -301,8 +330,26 @@
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
+  }
+  .pr-10 {
+    padding-right: calc(var(--spacing) * 10);
+  }
+  .pr-20 {
+    padding-right: calc(var(--spacing) * 20);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
   .pl-4 {
     padding-left: calc(var(--spacing) * 4);
+  }
+  .pl-10 {
+    padding-left: calc(var(--spacing) * 10);
+  }
+  .pl-20 {
+    padding-left: calc(var(--spacing) * 20);
   }
   .text-center {
     text-align: center;
@@ -315,9 +362,17 @@
     font-size: var(--text-4xl);
     line-height: var(--tw-leading, var(--text-4xl--line-height));
   }
+  .text-5xl {
+    font-size: var(--text-5xl);
+    line-height: var(--tw-leading, var(--text-5xl--line-height));
+  }
   .text-6xl {
     font-size: var(--text-6xl);
     line-height: var(--tw-leading, var(--text-6xl--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
   }
   .leading-tight {
     --tw-leading: var(--leading-tight);
@@ -330,8 +385,14 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
+  .text-\[\#FF5599\] {
+    color: #FF5599;
+  }
   .text-\[\#ff5599\] {
     color: #ff5599;
+  }
+  .text-amber-50 {
+    color: var(--color-amber-50);
   }
   .text-purple-500 {
     color: var(--color-purple-500);
@@ -491,6 +552,16 @@ header {
   border-radius: 0.25rem;
   z-index: 10;
 }
+.article__image {
+  transition: transform 0.3s ease;
+}
+.article__image:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.article__title {
+  font-family: "Dancing Script";
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -510,6 +581,11 @@ header {
 @property --tw-skew-y {
   syntax: "*";
   inherits: false;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }
 @property --tw-gradient-position {
   syntax: "*";
@@ -622,6 +698,7 @@ header {
       --tw-rotate-z: initial;
       --tw-skew-x: initial;
       --tw-skew-y: initial;
+      --tw-border-style: solid;
       --tw-gradient-position: initial;
       --tw-gradient-from: #0000;
       --tw-gradient-via: #0000;

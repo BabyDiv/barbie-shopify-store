@@ -1,0 +1,61 @@
+<div class="article flex flex-col pl-20 pr-20">
+  <h1 class="article__title flex flex-col text-center text-5xl m-20 text-[#FF5599]"> 
+    {% comment %} {{ article.title }}  {% endcomment %}
+     {{ section.settings.heading }}
+  </h1>
+  
+  {% if section.settings.enable_author %}
+    <small class="text-[#FF5599]">{{ article.author }}</small>
+  {% endif %}
+
+  {% if section.settings.enable_publish_date %}
+    <time class="text-[#FF5599]" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%Y-%m-%d' }}</time>
+  {% endif %}
+
+  <img class="article__image" src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt }}">
+
+  <div class="flex flex-col text-center gap-4"> {{ article.content }}</div>
+</div>
+
+{% schema %}
+{
+  "name": "Template Article",
+  "settings": [
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "Heading",
+      "default": "Winter Holiday Sledding Fun Set",
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_author",
+      "default": true,
+      "label": "Display Author Name"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_publish_date",
+      "default": true,
+      "label": "Display Published Date"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article_title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "article_author",
+      "name": "Author",
+      "limit": 1
+    },
+    {
+      "type": "article_publish_date",
+      "name": "Publish Date",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}

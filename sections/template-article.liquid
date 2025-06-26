@@ -1,20 +1,33 @@
 <div class="article flex flex-col pl-20 pr-20">
-  <h1 class="article__title flex flex-col text-center text-5xl m-20 text-[#FF5599]"> 
-    {% comment %} {{ article.title }}  {% endcomment %}
-     {{ section.settings.heading }}
-  </h1>
-  
-  {% if section.settings.enable_author %}
-    <small class="text-[#FF5599]">{{ article.author }}</small>
-  {% endif %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'article_title' %}
+      <h1 class="article__title flex flex-col text-center text-5xl m-20 text-[#FF5599]"> 
+        {{ article.title }} 
+        {% comment %} {{ section.settings.heading }} {% endcomment %}
+      </h1>
+        
+    {% when 'article_author' %}
+      {% if section.settings.enable_author %}
+        <small class="text-[#FF5599]">{{ article.author }}</small>
+      {% endif %}
+    {% when 'article_publish_date' %}
+      {% if section.settings.enable_publish_date %}
+        <time class="text-[#FF5599]" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%Y-%m-%d' }}</time>
+      {% endif %}
+    {% when 'article_image' %}      
+      {% if section.settings.enable_image %}
+        <img class="article__image" src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt }}">
+      {% endif %}
+    {% when 'article_content' %}
+      {% if section.settings.enable_content %}
+        <div class="flex flex-col text-center gap-4"> {{ article.content }}</div>
+      {% endif %}
+      
+    {% endcase %}
 
-  {% if section.settings.enable_publish_date %}
-    <time class="text-[#FF5599]" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%Y-%m-%d' }}</time>
-  {% endif %}
+  {% endfor %}
 
-  <img class="article__image" src="{{ article.image | img_url: 'master' }}" alt="{{ article.image.alt }}">
-
-  <div class="flex flex-col text-center gap-4"> {{ article.content }}</div>
 </div>
 
 {% schema %}
@@ -25,7 +38,7 @@
       "id": "heading",
       "type": "text",
       "label": "Heading",
-      "default": "Winter Holiday Sledding Fun Set",
+      "default": "Winter Holiday Sledding Fun Set"
     },
     {
       "type": "checkbox",
@@ -38,6 +51,18 @@
       "id": "enable_publish_date",
       "default": true,
       "label": "Display Published Date"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image",
+      "default": true,
+      "label": "Display image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_content",
+      "default": true,
+      "label": "Display checkbox"
     }
   ],
   "blocks": [
@@ -54,6 +79,16 @@
     {
       "type": "article_publish_date",
       "name": "Publish Date",
+      "limit": 1
+    },
+    {
+      "type": "article_image",
+      "name": "Image",
+      "limit": 1
+    },
+    {
+      "type": "article_content",
+      "name": "Content",
       "limit": 1
     }
   ]

@@ -132,34 +132,3 @@
   </nav>
 
 </header>
-
-
-
-{% comment %} <ul>
-  {% for item in linklists["main-menu"].links %}
-    <li class="pl-4">
-      {{ item.title }} {{ item.url }}
-
-
-      {% if item.links != blank %}
-        <ul>
-          {%  for item in item.links %}
-            <li class="pl-4">
-              {{ item.title }} {{ item.url }}
-
-              {% if item.links != blank %}
-                <ul>
-                  {% for item in item.links %}
-                    <li class="pl-4">
-                      {{ item.title }} {{ item.url }}
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul> {% endcomment %}

@@ -151,6 +151,16 @@ header {
 }
 
 .article__title {
-  font-family: "Dancing Script";
+  font-family: 'Dancing Script';
+}
+
+.article__link {
+  all: unset;
+  font-family: 'Dancing Script';
+  font-size: 42px;
+  font-weight: 700;
+  color: #ff5599;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 

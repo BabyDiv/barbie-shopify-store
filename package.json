@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "shopify theme dev --store my-first-barbie-store --theme 179162251538 --port=3000",
     "build": "npx @tailwindcss/cli --input ./src/index.css --output ./assets/index.css",
-    "watch": "npx @tailwindcss/cli --input ./src/index.css --output ./assets/index.css --watch"
+    "watch": "npx @tailwindcss/cli --input ./src/index.css --output ./assets/index.css --watch",
+    "logout": "shopify auth logout"
   },
   "repository": {
     "type": "git",

@@ -1,115 +1,31 @@
-{% comment %} <header class="relative w-full md:flex flex-row justify-between">
-  
-  {% comment %} {% assign list_json = '[
-    { "name": "Barbie Mermaid" },
-    { "name": "Barbie Totally Hair",
-      "sub_items": [
-        { "name": "Blonde Hair" },
-        { "name": "Brunette Hair" }
-        ]
-      },
-      { "name": "Barbie Enchanted" }
-      ]'
-      %} {% endcomment %}
-      
-      {% assign items = 'Main, Contacts, About, Catalog, Delivery, Account, Cart' | split: ',' %}
-      {% assign sub_items = 'Barbie, Kelly, Midge, Skipper, Teresa, Ken' | split: ',' %}
-      {% assign sub_sub_items = 'Barbie 2000-s, Barbie 90-s, Barbie 80-s, Barbie 70-s' | split: ',' %}
-
-  <div class="floating-particles pointer-events-none"></div>
+<header class="relative w-full md:flex flex-row justify-between border-4 border-[#ff5599]">
+  <div class="floating-particles absolute top-0 left-0 w-full h-full z-0 pointer-events-none overflow-hidden"></div>
   <div class="flex justify-between items-center p-2">
     <a href="{{ routes.root_url }}" aria-label="Barbie Home">
        <img class="nav__logo" src="{{ 'logo.svg' | asset_url }}" alt="Barbie Logo" width="80" height="20">
-       {% comment %} {% render 'logo', width: '80', height: '20' %} {% endcomment %}
     </a>
-    <button id="burger" class="burger md:hidden">
-      <img src="{{ 'burger.svg' | asset_url }}" class="burger__icon" width="50" height="50">
-      <img src="{{ 'cross.svg' | asset_url }}" class="burger__cross hidden" width="40" height="40">
-    </button>
-  </div>
-      
-  <nav class="nav">
-    <ul class="nav__list hidden flex-col md:flex flex-row justify-between gap-5 items-center md:items-start w-full p-8 lg:gap-20">
-      {% comment %} <li class="item">
-        <a class="nav__link flex justify-center" href="{{ routes.root_url }}" aria-label="Barbie Home">
-          <img class="nav__logo" src="{{ 'logo.svg' | asset_url }}" alt="Barbie Logo" width="80" height="20">
-        </a>
-      </li> {% endcomment %}
-      {% for item in items %}
-        {% assign barbie_item = item | strip %}
-        
-        <li class="item relative {% if barbie_item == 'Catalog' %}has-dropdown{% endif %}">
-          <a href="#" class=" text-[#ff5599] nav__link">{{ barbie_item }}</a>
-        {% if barbie_item == 'Catalog' %}
-          <ul class="item__sub absolute visibility-hidden flex flex-col items-center">
-            {% for sub_item in sub_items %}
-              {% assign new_item = sub_item | strip %}
-              <li class="flex flex-col items-center {% if new_item == 'Barbie' %}has-dropdown{% endif %}">
-                <a href="#" class="text-[#ff5599] nav__link">{{ sub_item | strip }}</a>
-                {% if new_item == 'Barbie' %}
-                  <ul class="item__sub_sub visibility-hidden flex flex-col items-center">
-                    {% for sub_sub_item in sub_sub_items %}
-                      <li>
-                        <a href="#" class="text-[#ff5599] nav__link">{{ sub_sub_item | strip }}</a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul> 
-        {% endif %}
-      </li>
-      {% endfor %}
-    </ul>
-  </nav>
-</header>
-
-{% schema %}
-  {
-    "name": "Navigation",
-  "settings": [
-    {"type": "text",
-     "id": "new_id",
-     "label": "Title",
-     "default": "Menu",
-     "info": "I've added some new settings"
-    }
-  ]
-}
-{% endschema %} {% endcomment %}
-
-{% comment %} {{ shop.customer_accounts_enabled }} {% endcomment %}
-
-<header class="relative w-full md:flex flex-row justify-between">
-  <div class="floating-particles pointer-events-none"></div>
-  <div class="flex justify-between items-center p-2">
-    <a href="{{ routes.root_url }}" aria-label="Barbie Home">
-       <img class="nav__logo" src="{{ 'logo.svg' | asset_url }}" alt="Barbie Logo" width="80" height="20">
-       {% comment %} {% render 'logo', width: '80', height: '20' %} {% endcomment %}
-    </a>
-    <button id="burger" class="burger md:hidden">
-      <img src="{{ 'burger.svg' | asset_url }}" class="burger__icon" width="50" height="50">
-      <img src="{{ 'cross.svg' | asset_url }}" class="burger__cross hidden" width="40" height="40">
+    <button id="burger" class="cursor-pointer md:hidden">
+      <img src="{{ 'burger.svg' | asset_url }}" class="js-burger-icon" width="50" height="50">
+      <img src="{{ 'cross.svg' | asset_url }}" class="js-burger-cross hidden" width="40" height="40">
     </button>
   </div>
 
   <nav class="nav">
-    <ul class="nav__list hidden flex-col md:flex flex-row justify-between gap-2 items-center md:items-start w-full p-6 lg:gap-20">
+    <ul class="js-nav-list hidden flex-col md:flex flex-row text-center justify-between gap-2 items-center md:items-start w-full p-6 lg:gap-20">
       {% for item in linklists["main-menu"].links %}
         
-        <li class="item relative {% if item.links != blank %}has-dropdown{% endif %}">
-          <a href="{{ item.url }}" class=" text-[#ff5599] nav__link">{{ item.title }}</a>
+        <li class="item text-center relative {% if item.links != blank %}has-dropdown{% endif %}">
+          <a href="{{ item.url }}" class=" text-[#ff5599] nav-link text-[32px] hover:opacity-70">{{ item.title }}</a>
         {% if item.links != blank %}
-          <ul class="item__sub absolute visibility-hidden flex flex-col items-center">
+          <ul class="js-item-sub absolute visibility-hidden flex flex-col items-center bg-white p-5 w-[200px] left-1/2 top-[50px] transform -translate-x-1/2 shadow-md rounded z-10 absolute md:left-1/2 md:top-[50px] md:transform md:-translate-x-1/2">
             {% for item in item.links %}
               <li class="flex flex-col items-center {% if item.links != blank %}has-dropdown{% endif %}">
-                <a href="{{ item.url }}" class="text-[#ff5599] nav__link">{{ item.title }}</a>
+                <a href="{{ item.url }}" class="text-[#ff5599] nav-link hover:opacity-70">{{ item.title }}</a>
                 {% if item.links != blank %}
-                  <ul class="item__sub_sub visibility-hidden flex flex-col items-center">
+                  <ul class="js-item-sub_sub visibility-hidden flex flex-col items-center">
                     {% for item in item.links %}
                       <li>
-                        <a href="#" class="text-[#ff5599] nav__link">{{ item.title }}</a>
+                        <a href="#" class="text-[#ff5599] nav-link hover:opacity-70">{{ item.title }}</a>
                       </li>
                     {% endfor %}
                   </ul>
@@ -122,44 +38,13 @@
       {% endfor %}
       {% if shop.customer_accounts_enabled %}
         <li class="item relative">
-          <a href="{{ routes.account_login_url }}" class="text-[#ff5599] nav__link">Login</a>
+          <a href="{{ routes.account_login_url }}" class="text-[#ff5599] nav-link">Login</a>
         </li>
         <li class="item relative">
-          <a href="{{ routes.account_register_url }}" class="text-[#ff5599] nav__link">Register</a>
+          <a href="{{ routes.account_register_url }}" class="text-[#ff5599] nav-link">Register</a>
         </li>
       {% endif %}
     </ul>
   </nav>
 
 </header>
-
-
-
-{% comment %} <ul>
-  {% for item in linklists["main-menu"].links %}
-    <li class="pl-4">
-      {{ item.title }} {{ item.url }}
-
-
-      {% if item.links != blank %}
-        <ul>
-          {%  for item in item.links %}
-            <li class="pl-4">
-              {{ item.title }} {{ item.url }}
-
-              {% if item.links != blank %}
-                <ul>
-                  {% for item in item.links %}
-                    <li class="pl-4">
-                      {{ item.title }} {{ item.url }}
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul> {% endcomment %}

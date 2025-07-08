@@ -9,12 +9,11 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "blog",
-      "settings": {}
+    "template": {
+      "type": "template-blog"
     }
   },
   "order": [
-    "main"
+    "template"
   ]
 }

@@ -1,5 +1,5 @@
 document.querySelectorAll('.has-dropdown').forEach((item) => {
-  let itemSub = item.parentElement.querySelector('.item__sub');
+  let itemSub = item.parentElement.querySelector('.js-item-sub');
   
   item.addEventListener('mouseenter', () => {
     itemSub?.classList.remove('visibility-hidden');
@@ -11,8 +11,8 @@ document.querySelectorAll('.has-dropdown').forEach((item) => {
   });
 });
 
-document.querySelectorAll('.item__sub li.has-dropdown').forEach((subItem) => {
-  const itemSubSub = subItem.querySelector('.item__sub_sub');
+document.querySelectorAll('.js-item-sub li.has-dropdown').forEach((subItem) => {
+  const itemSubSub = subItem.querySelector('.js-item-sub_sub');
 
   subItem.addEventListener('mouseenter', () => {
     itemSubSub?.classList.remove('visibility-hidden');
@@ -23,8 +23,8 @@ document.querySelectorAll('.item__sub li.has-dropdown').forEach((subItem) => {
   });
 });
 
-document.querySelectorAll('.item__footer.has-dropdown').forEach((item) => {
-  const itemUl = item.querySelector('.item__ul');
+document.querySelectorAll('.js-item-footer.has-dropdown').forEach((item) => {
+  const itemUl = item.querySelector('.js-item-ul');
 
   item.addEventListener('mouseenter', () => {
     itemUl?.classList.remove('visibility-hidden');
@@ -36,9 +36,9 @@ document.querySelectorAll('.item__footer.has-dropdown').forEach((item) => {
 });
 
 let burger = document.getElementById('burger');
-let navList = document.querySelector('.nav__list');
-let burgerIcon = document.querySelector('.burger__icon');
-let burgerCross = document.querySelector('.burger__cross');
+let navList = document.querySelector('.js-nav-list');
+let burgerIcon = document.querySelector('.js-burger-icon');
+let burgerCross = document.querySelector('.js-burger-cross');
 
 burger.addEventListener('click', () => {
   navList.classList.toggle('hidden');

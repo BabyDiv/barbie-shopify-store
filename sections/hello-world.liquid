@@ -1,24 +1,11 @@
-{% comment %}
-  Welcome to Shopify theme development!
-{% endcomment %}
-
 {% assign barbies = 'Totally Hair Barbie, Jewel Hair Mermaid Barbie, Magical Hair Mermaid Barbie' | split: ',' %}
 {% assign images = 'totally-hair-barbie.jpg, jewel-hair-mermaid-barbie.jpg, magical-hair-mermaid-barbie.jpg' | split:',' %}
 
 <div class="welcome full-width flex flex-col items-center mt-40 mb-40">
-  <h1 class="welcome__header text-6xl text-center leading-tight font-bold text-transparent bg-clip-text animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500">Welcome to my first Barbie store</h1>
-
-  {% comment %} <ul class="welcome__list full-width flex flex-col gap-2 mt-10">
-    {% for barbie in barbies %}
-    <li>
-        {% assign barbie_doll = barbie | strip %}
-        <a href="#" class="text-2xl mt-10 font-bold text-transparent bg-clip-text animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500"> {{ barbie_doll }} </a>
-      </li>
-    {% endfor %}
-  </ul> {% endcomment %}
+  <h1 class="welcome-header text-6xl text-center leading-tight font-bold text-transparent bg-clip-text animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500">Welcome to my first Barbie store</h1>
 
   <div class="relative w-full h-10 mt-2 overflow-hidden bg-white">
-    <div class="absolute whitespace-nowrap welcome__title text-4xl font-bold text-purple-500 animate-marquee">
+    <div class="absolute whitespace-nowrap welcome-title text-4xl font-bold text-purple-500 animate-marquee">
       ✨ Welcome to Barbie World ✨ Welcome to Barbie World ✨ Welcome to Barbie World ✨
     </div>
   </div>
@@ -29,7 +16,7 @@
       {% assign image_name = images[forloop.index0] | strip %}
 
       <li class="flex flex-col items-center text-center">
-        <img src="{{ image_name | asset_url }}" alt="{{ barbie_doll }}" class="welcome__img w-100 h-135 mb-4">
+        <img src="{{ image_name | asset_url }}" alt="{{ barbie_doll }}" class="border-[5px] border-purple-500 rounded-full w-100 h-135 mb-4">
         <a href="#" class="text-2xl font-bold text-transparent bg-clip-text animate-gradient bg-gradient-to-r from-pink-500 via-yellow-500 to-purple-500">
           {{ barbie_doll }}
         </a>
